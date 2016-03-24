@@ -1,0 +1,45 @@
+.navbar-fixed-bottom{
+	background-color: white;
+}
+
+body{
+	background-color: #D7DCE5;
+}
+
+
+.tr{
+	background-color: #A15C05;
+}
+.tr2{
+	background-color: #FFC984;
+}
+.navbar-fixed-top{
+	background-color: #000419;
+}
+.navbar.navbar-inverse.navbar-fixed-top li a{
+	color : #BAC5FF;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top li a:hover{
+	background-color : 	#BAC5FF;
+	color : #000419;
+}
+.navbar.navbar-inverse.navbar-fixed-top a{
+	color : #BAC5FF;
+
+}
+
+.navbar-fixed-bottom{
+	background-color : #000419;
+}
+
+.navbar-fixed-bottom h5{
+	color : #BAC5FF;
+}
+
+#centeredMap{
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+}
+
