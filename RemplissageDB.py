@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from src.interactionBD import *
+from src.Exceptions.ConnexionException import *
+from src.Exceptions.SQLResquestFail import *
 import mysql.connector
 import csv
 
 
 #-----------------------------#
-#			MAIN			  #
+#		MAIN Remplissage      #
 #-----------------------------#
 
 db = mysql.connector.connect(host="infoweb",user="E134935T",password="E134935T",database="E134935T")

@@ -72,7 +72,7 @@
 					    var locations = []
 					    //on creer un clone de locs, liste de tuple (lat,long)
 					    %for row in locs:
-					   		locations.append({{row}})
+					   		locations.push({{row}}) // !!! interprété comme code python
 					   	%end
 
 					    var map = new google.maps.Map(document.getElementById('map'), {

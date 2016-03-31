@@ -4,11 +4,14 @@
 from libs.bottle import *
 import mysql.connector
 from src.interactionBD import *
+from src.Exceptions.ConnexionException import *
+from src.Exceptions.SQLResquestFail import *
 from src.Util_String import *
 
 ##################
 #    ROUTING     #
 ##################
+
 @route('/static/<filepath:path>')
 def file_stac(filepath):
   	return static_file(filepath,root="./static")
@@ -37,7 +40,7 @@ def search():
 	#Si les deux champs sont renseignes
 	if sport != '' and ville != '':
 		print('2 champs renseignes')
-		requeteFinale = ''.join(["select i.numero, i.nom, e.numero, e.nom, a.numero, a.nom FROM Installation i JOIN Equipement e ON i.numero = e.numinst JOIN Equipement_Activite ea ON e.numero = ea.numequip JOIN Activite a ON ea.numact = a.numero WHERE i.ville = '",str(ville),"' AND a.nom LIKE '%",str(sport),"%' "]) 
+		requeteFinale = ''.join(["select DISTINCT i.numero, i.nom, e.numero, e.nom, a.numero, a.nom FROM Installation i JOIN Equipement e ON i.numero = e.numinst JOIN Equipement_Activite ea ON e.numero = ea.numequip JOIN Activite a ON ea.numact = a.numero WHERE i.ville = '",str(ville),"' AND a.nom LIKE '%",str(sport),"%' "]) 
 		print(requeteFinale)
 		result = getRequete(requeteFinale)
 		print(result)
@@ -47,7 +50,7 @@ def search():
 	#Sinon si ville renseigne	
 	elif ville != '':
 		print('ville renseignes')
-		requeteFinale = ''.join(["select a.nom FROM Installation i JOIN Equipement e ON i.numero = e.numinst JOIN Equipement_Activite ea ON e.numero = ea.numequip JOIN Activite a ON ea.numact = a.numero WHERE i.ville = '",str(ville),"'"])
+		requeteFinale = ''.join(["select DISTINCT a.nom FROM Installation i JOIN Equipement e ON i.numero = e.numinst JOIN Equipement_Activite ea ON e.numero = ea.numequip JOIN Activite a ON ea.numact = a.numero WHERE i.ville = '",str(ville),"'"])
 		print(requeteFinale)
 		result = getRequete(requeteFinale)
 		# Valeur de view si QUE VILLE
@@ -56,7 +59,7 @@ def search():
 	#Sinon si sport renseigne	
 	elif sport != '':
 		print('sport renseignes')
-		requeteFinale = ''.join(["select i.ville from Installation i, Equipement e, Equipement_Activite ea, Activite a WHERE i.numero=e.numinst and e.numero=ea.numequip and ea.numact=a.numero and a.nom LIKE '%",str(sport),"%'"])
+		requeteFinale = ''.join(["select DISTINCT i.ville from Installation i, Equipement e, Equipement_Activite ea, Activite a WHERE i.numero=e.numinst and e.numero=ea.numequip and ea.numact=a.numero and a.nom LIKE '%",str(sport),"%'"])
 		print(requeteFinale)
 		result = getRequete(requeteFinale)
 		# Valeur de view si QUE SPORT
@@ -94,4 +97,4 @@ def map():
 	return (context)
 
 
-run(host='localhost', port=8082, reloader=True)
+run(host='localhost', port=8080, reloader=True)
